@@ -1,0 +1,21 @@
+import calendar
+import pandas as pd  
+import numpy as np  
+from scipy import stats  
+  
+# 假设你的数据在df DataFrame中  
+df = "C:/Users/无爱一身轻/Downloads/movie_data_cleaned (3).csv" # 将your_data替换为你的数据
+# 计算总体均值  
+overall_mean = df.mean()  
+print(f"总体均值：\n{overall_mean}")  
+  
+# 从总体中随机抽取100行数据  
+sample = df.sample(n=100) # .sample()函数用于随机抽取行  
+  
+# 计算样本均值  
+sample_mean = sample.mean()  
+print(f"样本均值：\n{sample_mean}")  
+  
+# 计算95%置信水平对应的置信区间  
+confidence_interval = stats.t.interval(0.95, len(sample)-1, loc=sample_mean, scale=stats.sem(sample))  
+print(f"95%置信区间：\n{confidence_interval}")
